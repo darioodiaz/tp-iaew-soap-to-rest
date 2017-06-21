@@ -6,14 +6,15 @@ const credentials = {
     secret: 'pass12345'
   },
   auth: {
-    tokenHost: 'http://104.198.185.19:8080/openam/oauth2/authorize'
+    tokenHost: 'http://104.198.185.19:8080/openam/oauth2/',
+    authorizePath: 'http://104.198.185.19:8080/openam/oauth2/authorize'
   }
 };
-const redirect_uri = 'http://localhost:3000/access_token';
+const redirect_uri = 'http://localhost:3000/callback';
 
 const oauthServer = OAuth2.create(credentials);
 
-function getAuthorizationUri(scope = 'access_api') {
+function getAuthorizationUri(scope = 'read') {
   const authorizationUri = oauthServer.authorizationCode.authorizeURL({ redirect_uri, scope });
   return authorizationUri;
 }
@@ -22,6 +23,7 @@ function getAccessToken(code, res) {
   oauthServer.authorizationCode.getToken(tokenConfig)
     .then((result) => {
       const token = oauth2.accessToken.create(result);
+      console.log(token);
     })
     .catch((error) => {
       console.log('Access Token Error', error.message);
@@ -30,7 +32,6 @@ function getAccessToken(code, res) {
 }
 
 function validateRequest(req, res, next) {
-
 }
 
 module.exports = {

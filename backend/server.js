@@ -1,5 +1,5 @@
 const restify = require('restify');
-const Autorization = require('./modules/auth');
+const Authorization = require('./modules/auth');
 const Soap = require('./modules/soap');
 
 const server = restify.createServer({
@@ -14,18 +14,18 @@ server.use(restify.plugins.bodyParser());
 
 /* Login */
 server.get('/login', (req, res, next) => {
-  const authorizationUri = Autorization.getAuthorizationUri();
+  const authorizationUri = Authorization.getAuthorizationUri();
   res.redirect(authorizationUri, next);
 });
 
-server.get('/access_token', (req, res, next) => {
+server.get('/callback', (req, res, next) => {
   console.log(req.body,' - P - ', req.params);
-  const authorizationUri = Autorization.getAccessToken();
+  const authorizationUri = Authorization.getAccessToken();
   res.redirect(authorizationUri, next);
 });
 
 /* Vehiculos */ 
-server.get(buildEndpoint('vehiculos'), Autorization.validateRequest, (req, res, next) => {
+server.get(buildEndpoint('vehiculos'), Authorization.validateRequest, (req, res, next) => {
   res.send(req.params);
   return next();
 });
@@ -49,7 +49,7 @@ server.del(buildEndpoint('reservas/:id'), (req, res, next) => {
 });
 
 
-server.listen(3000, function () {
+server.listen(4000, function () {
   console.log('%s listening at %s', server.name, server.url);
 });
 
