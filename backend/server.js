@@ -19,40 +19,43 @@ server.get('/login', (req, res, next) => {
 });
 
 server.get('/callback', (req, res, next) => {
-  console.log(req.body,' - P - ', req.params);
-  const authorizationUri = Authorization.getAccessToken();
-  res.redirect(authorizationUri, next);
+  Authorization.getAccessToken(req.params.code).then((token) => {
+    res.send(200, token);
+  }).catch((error) => {
+    console.log('Error al obtener access token', error);
+    res.send(500, error);
+  });
 });
 
-/* Vehiculos */ 
+/* Vehiculos */
 server.get(buildEndpoint('vehiculos'), Authorization.validateRequest, (req, res, next) => {
   res.send(req.params);
   return next();
 });
 
-/* Listar reservas */ 
+/* Listar reservas */
 server.get(buildEndpoint('reservas'), (req, res, next) => {
   res.send(req.params);
   return next();
 });
 
-/* Ver una reserva */ 
+/* Ver una reserva */
 server.get(buildEndpoint('reservas/:id'), (req, res, next) => {
   res.send(req.params);
   return next();
 });
 
-/* Cancelar una reserva */ 
+/* Cancelar una reserva */
 server.del(buildEndpoint('reservas/:id'), (req, res, next) => {
   res.send(req.params);
   return next();
 });
 
 
-server.listen(4000, function () {
+server.listen(3000, function () {
   console.log('%s listening at %s', server.name, server.url);
 });
 
 function buildEndpoint(route) {
-    return `${PREFIX}/route`;
+  return `${PREFIX}/${route}`;
 }
