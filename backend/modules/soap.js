@@ -5,9 +5,11 @@ let soapClient;
 
 soap.createClient(SOAP_URL, (err, client) => { soapClient = client; });
 
-function callResource(resource, params = {}, scb, ecb) {
+function callResource(resource, scb, ecb, params = {}) {
+    if (!soapClient) {
+        throw Error('Aun no se inicio el cliente SOAP');
+    }
     soapClient[resource](params, (err, result) => {
-        console.log(result);
         if (err) {
             ecb(err);
         } else {
@@ -16,6 +18,4 @@ function callResource(resource, params = {}, scb, ecb) {
     });
 }
 
-module.exports = {
-    callResource
-};
+module.exports = callResource;
