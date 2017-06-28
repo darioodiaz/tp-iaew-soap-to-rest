@@ -1,8 +1,9 @@
 const PREFIX = '/api';
 
 const SOAP_SERVICES = {
-    'PAISES': 'ConsultarPaises',
-    'CIUDADES': 'ConsultarCiudades'
+    'CONSULTAR_PAISES': 'ConsultarPaises',
+    'CONSULTAR_CIUDADES': 'ConsultarCiudades',
+    'VEHICULOS_DISPONIBLES': 'ConsultarVehiculosDisponibles'
 };
 
 const Utils = {
