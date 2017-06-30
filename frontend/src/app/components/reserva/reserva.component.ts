@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 export class ReservaComponent implements OnInit {
 
   private token: string;
+  public resultados: any[] = [];
 
   constructor() { }
 
@@ -16,6 +17,20 @@ export class ReservaComponent implements OnInit {
   public obtenerToken() {
 
   }
+
+  public consultar() {
+    console.log("buscar reservas por pais");
+    let automovil = {
+      id: 1,
+      pais: 'Argentina',
+      estado: 'Libre',
+      precio: 500
+    }
+
+    this.resultados.push(automovil);
+
+  }
+
 
 
 }

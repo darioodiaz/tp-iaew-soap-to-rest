@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule }   from '@angular/forms';
 
 import { APP_ROUTING } from './app.routes';
 
@@ -15,6 +16,7 @@ import { ReservaComponent } from './components/reserva/reserva.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     APP_ROUTING
   ],
   providers: [],
