@@ -1,7 +1,7 @@
-const args = require('yargs').argv;
 const restify = require('restify');
-const Authorization = require('./modules/auth');
+const fs = require('fs');
 
+const Authorization = require('./modules/auth');
 const apiRouter = require('./modules/apis');
 
 const server = restify.createServer({
@@ -9,7 +9,7 @@ const server = restify.createServer({
   version: '1.0.0'
 });
 
-const DEBUG = args.debug;
+const DEBUG = process.env.DEBUG === 'true';
 
 console.log(DEBUG && 'WARNING: Debug mode');
 
@@ -28,10 +28,30 @@ server.get('/login', (req, res, next) => {
 
 server.get('/callback', (req, res, next) => {
   Authorization.getAccessToken(req.params.code).then((token) => {
-    res.send(200, token);
+    console.log('Access token', token);
+    res.redirect(301, '/app', next);
   }).catch((error) => {
     console.log('Error al obtener access token', error);
     res.send(500, error);
+  });
+});
+
+server.get(/(.js|.map|.css)$/, restify.serveStatic({
+  directory: './frontend',
+  default: 'index.html'
+}));
+server.get('/app', DEBUG ? (req, res, next) => { next() } : Authorization.validateAppAccess, (req, res) => {
+  fs.readFile('./frontend/index.html', (err, data) => {
+    if (err) {
+      res.send(500, err);
+    } else {
+      res.writeHead(200, {
+        'Content-Length': Buffer.byteLength(data),
+        'Content-Type': 'text/html'
+      });
+      res.write(data);
+      res.end();
+    }
   });
 });
 

@@ -43,10 +43,7 @@ function validateToken(token) {
   return axios.get('http://104.197.29.243:8080/openam/oauth2/tokeninfo', config).then((tokenInfo) => {
     let token = oauth2.accessToken.create(tokenInfo);
     if (token.expired()) {
-      token.refresh()
-        .then((result) => {
-          token = result;
-        });
+      token.refresh().then((result) => { token = result; });
     }
   });
 }
@@ -63,7 +60,26 @@ function validateRequest(req, res, next) {
     next();
   }, () => {
     console.log('Token invalido o expirado');
-    res.redirect('/login');
+    res.redirect(401, '/login');
+  }).catch((error) => {
+    console.log('Error al validar el token', error);
+    res.send(500, error);
+  });
+}
+
+function validateAppAccess(req, res, next) {
+  let token = req.headers.authorization;
+  if (!token) {
+    res.redirect(401, '/login', next);
+    return;
+  }
+  console.log('Token de usuario:', token);
+  validateToken(token).then(() => {
+    console.log('Token valido');
+    next();
+  }, () => {
+    console.log('Token invalido o expirado');
+    res.redirect(401, '/login', next);
   }).catch((error) => {
     console.log('Error al validar el token', error);
     res.send(500, error);
@@ -73,5 +89,6 @@ function validateRequest(req, res, next) {
 module.exports = {
   getAuthorizationUri,
   getAccessToken,
-  validateRequest
+  validateRequest,
+  validateAppAccess
 };

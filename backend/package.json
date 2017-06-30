@@ -2,10 +2,11 @@
   "name": "tpi-iaew",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "debug": "node server.js --debug=true"
+    "deploy": "rm -r frontend && cd ../frontend && yarn && yarn build && cp -R dist ../backend && cd ../backend && mv dist frontend",
+    "debug": "DEBUG=true node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +16,5 @@
     "restify-router": "^0.4.2",
     "simple-oauth2": "^1.2.0",
     "soap": "^0.19.2",
-    "yargs": "^8.0.2"
   }
 }
