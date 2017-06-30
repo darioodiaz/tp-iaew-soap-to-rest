@@ -3,6 +3,7 @@ const fs = require('fs');
 
 const Authorization = require('./modules/auth');
 const apiRouter = require('./modules/apis');
+const db = require('./modules/db.js');
 
 const server = restify.createServer({
   name: 'tpi-iaew-api-rest',
@@ -55,6 +56,8 @@ server.get('/app', DEBUG ? (req, res, next) => { next() } : Authorization.valida
   });
 });
 
-server.listen(3000, function () {
-  console.log('%s listening at %s', server.name, server.url);
+db(() => {
+  server.listen(3000, () => {
+    console.log('%s listening at %s', server.name, server.url);
+  });
 });

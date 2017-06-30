@@ -12,6 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.16.2",
+    "bluebird": "^3.5.0",
+    "mongoose": "^4.11.0",
     "restify": "^4.3.0",
     "restify-router": "^0.4.2",
     "simple-oauth2": "^1.2.0",
