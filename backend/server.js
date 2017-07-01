@@ -19,11 +19,11 @@ server.use(restify.plugins.CORS());
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
 server.use(CookieParser.parse);
+
 apiRouter.setDebug(DEBUG);
 apiRouter.createApis();
 apiRouter.applyRoutes(server);
 
-/* Login */
 server.get('/login', (req, res, next) => {
   const authorizationUri = Authorization.getAuthorizationUri();
   res.redirect(authorizationUri, next);
@@ -47,6 +47,7 @@ server.get(/(.js|.map|.css)$/, restify.serveStatic({
   directory: './frontend',
   default: 'index.html'
 }));
+
 server.get('/app', (req, res) => {
   fs.readFile('./frontend/index.html', (err, data) => {
     if (err) {

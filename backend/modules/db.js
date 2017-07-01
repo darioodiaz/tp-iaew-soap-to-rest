@@ -28,5 +28,8 @@ module.exports = function(cb) {
 			Nombre: String
 		});
 		cb();
-	}).catch( (err) => process.exit(101));
+	}).catch( (err) => {
+		console.log('Sin BD, se procede pero con advertencia');
+		cb();
+	});
 };
