@@ -1,10 +1,26 @@
 const PREFIX = '/api';
 
 const SOAP_SERVICES = {
-    'CONSULTAR_PAISES': 'ConsultarPaises',
-    'CONSULTAR_CIUDADES': 'ConsultarCiudades',
-    'VEHICULOS_DISPONIBLES': 'ConsultarVehiculosDisponibles',
-    'RESERVAR_VEHICULOS': 'ReservarVehiculo'
+    'CONSULTAR_PAISES': {
+        soapService: 'ConsultarPaises',
+        permissions: ['read', 'read_write']
+    },
+    'CONSULTAR_CIUDADES': {
+        soapService: 'ConsultarCiudades',
+        permissions: ['read', 'read_write']
+    },
+    'CONSULTAR_RESERVAS': {
+        soapService: 'ConsultarReservas',
+        permissions: ['read', 'read_write']
+    },
+    'VEHICULOS_DISPONIBLES': {
+        soapService: 'ConsultarVehiculosDisponibles',
+        permissions: ['read', 'read_write']
+    },
+    'RESERVAR_VEHICULO': {
+        soapService: 'ReservarVehiculo',
+        permissions: ['write', 'read_write']
+    },
 };
 
 const Utils = {

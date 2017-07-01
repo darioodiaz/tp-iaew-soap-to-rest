@@ -1,5 +1,6 @@
 const restify = require('restify');
 const fs = require('fs');
+const CookieParser = require('restify-cookies');
 
 const Authorization = require('./modules/auth');
 const apiRouter = require('./modules/apis');
@@ -17,6 +18,7 @@ console.log(DEBUG && 'WARNING: Debug mode');
 server.use(restify.plugins.CORS());
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
+server.use(CookieParser.parse);
 apiRouter.setDebug(DEBUG);
 apiRouter.createApis();
 apiRouter.applyRoutes(server);
@@ -29,7 +31,11 @@ server.get('/login', (req, res, next) => {
 
 server.get('/callback', (req, res, next) => {
   Authorization.getAccessToken(req.params.code).then((token) => {
-    console.log('Access token', token);
+    res.setCookie('app-token', token.access_token, {
+      path: '/',
+      maxAge: token.expires_in,
+      expires: token.expires_at
+    });
     res.redirect(301, '/app', next);
   }).catch((error) => {
     console.log('Error al obtener access token', error);
@@ -41,7 +47,7 @@ server.get(/(.js|.map|.css)$/, restify.serveStatic({
   directory: './frontend',
   default: 'index.html'
 }));
-server.get('/app', DEBUG ? (req, res, next) => { next() } : Authorization.validateAppAccess, (req, res) => {
+server.get('/app', (req, res) => {
   fs.readFile('./frontend/index.html', (err, data) => {
     if (err) {
       res.send(500, err);

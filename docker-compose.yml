@@ -1,0 +1,21 @@
+version: '2'
+services:
+  db:
+    container_name: tpiaew-db
+    image: mongo
+    volumes:
+      - ./db:/data/db
+
+  backend:
+    build: .
+    container_name: tpiaew-backend
+    image: tpiaew/backend
+    environment:
+      - DB=tpiaew-db
+      - DEBUG=true
+    volumes:
+      - ./backend:/backend/
+    depends_on:
+      - db
+    ports:
+      - 3000

@@ -5,14 +5,13 @@ const mongoose = require('mongoose');
 const server = {
 	connect,
 	createModel,
-	getModel,
-	getSyncModel
+	getModel
 };
 let models = {};
 
 function connect() {
 	let promise = new bluebird((resolve, reject) => {
-		mongoose.connect('mongodb://tpiaew-db/tpiaew', checkConnectionStatus);
+		mongoose.connect(`mongodb://${process.env.DB}/tpiaew`, checkConnectionStatus);
 
 		function checkConnectionStatus(error) {
 			if (error) {
