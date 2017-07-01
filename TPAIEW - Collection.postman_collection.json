@@ -1,0 +1,178 @@
+{
+	"variables": [],
+	"info": {
+		"name": "TPAIEW - Collection",
+		"_postman_id": "801dba48-caec-aba4-40a9-6cbf9a6d38ed",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "API - Paises",
+			"request": {
+				"url": "http://localhost:3000/api/paises",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 474d5f11-dc8b-4a8a-8001-c8be7b0c4157",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "API - Ciudades",
+			"request": {
+				"url": "http://localhost:3000/api/ciudades/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 474d5f11-dc8b-4a8a-8001-c8be7b0c4157",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "API - Vehiculos disponibles",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/api/vehiculos?idCiudad=2&fechaRetiro=2017-05-14&fechaDevolucion=2017-06-14",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"vehiculos"
+					],
+					"query": [
+						{
+							"key": "idCiudad",
+							"value": "2",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "fechaRetiro",
+							"value": "2017-05-14",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "fechaDevolucion",
+							"value": "2017-06-14",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 474d5f11-dc8b-4a8a-8001-c8be7b0c4157",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "API - Consultar Reservas",
+			"request": {
+				"url": {
+					"raw": "http://localhost:3000/api/reservas?incluirBajas=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"reservas"
+					],
+					"query": [
+						{
+							"key": "incluirBajas",
+							"value": "true",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 474d5f11-dc8b-4a8a-8001-c8be7b0c4157",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "API - Cancelar reserva",
+			"request": {
+				"url": "http://localhost:3000/api/reservas/AC00E",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 474d5f11-dc8b-4a8a-8001-c8be7b0c4157",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "API - Reservar",
+			"request": {
+				"url": "http://localhost:3000/api/reservas",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 474d5f11-dc8b-4a8a-8001-c8be7b0c4157",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idVehiculo\": 4,\n\t\"apellidoNombreCliente\": \"Diaz, Dario\",\n\t\"documentoCliente\": 35577465,\n\t\"fechaDevolucion\": \"2017-06-04\",\n\t\"fechaRetiro\": \"2017-06-20\",\n\t\"lugarDevolucion\": \"Aeropuerto\",\n\t\"lugarRetiro\": \"Hotel\",\n\t\"idCliente\": 1,\n\t\"idVendedor\": 1\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
