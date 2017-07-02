@@ -173,6 +173,42 @@
 				"description": ""
 			},
 			"response": []
+		},
+		{
+			"name": "API - Vendedores",
+			"request": {
+				"url": "http://localhost:3000/api/vendedores",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 474d5f11-dc8b-4a8a-8001-c8be7b0c4157",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "API - Clientes",
+			"request": {
+				"url": "http://localhost:3000/api/clientes",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 474d5f11-dc8b-4a8a-8001-c8be7b0c4157",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }

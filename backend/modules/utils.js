@@ -2,6 +2,15 @@ const xml2js = require('xml2js').parseString;
 
 const PREFIX = '/api';
 
+const SERVICES = {
+    'CONSULTAR_VENDEDORES': {
+        permissions: ['read', 'read_write']
+    },
+    'CONSULTAR_CLIENTES': {
+        permissions: ['read', 'read_write']
+    }
+};
+
 const SOAP_SERVICES = {
     'CONSULTAR_PAISES': {
         soapService: 'ConsultarPaises',
@@ -31,21 +40,20 @@ const SOAP_SERVICES = {
 
 function parseError(soapError, res) {
     xml2js(soapError.body, (err, result) => {
-        //console.log('Soap Error', result['s:Envelope']['s:Body'][0]['s:Fault']);
         onError(result['s:Envelope']['s:Body'][0]['s:Fault'], res);
     });
 }
 
 function onError(soapErrors, res) {
-    let errors = soapErrors.map( (error) => {
+    let errors = soapErrors.map((error) => {
         return {
             code: error.detail[0].StatusResponse[0].ErrorCode[0],
             error: error.detail[0].StatusResponse[0].ErrorDescription[0]
         };
     });
-    let errorAsString = errors.map( (error) => error.error ).join('\n');
+    let errorAsString = errors.map((error) => error.error).join('\n');
     console.log('Error:', errores);
-    res.send(500, { error: errorAsString, errors  });
+    res.send(500, { error: errorAsString, errors });
 }
 
 function debugMiddleware(req, res, next) {
@@ -60,6 +68,7 @@ function buildEndpoint(route) {
 const Utils = {
     PREFIX,
     SOAP_SERVICES,
+    SERVICES,
     buildEndpoint,
     debugMiddleware,
     parseError

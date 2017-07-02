@@ -1,4 +1,5 @@
 const db = require('../mongo-server');
+const moment = require('moment');
 const bluebird = require('bluebird');
 
 function buildsApis(apiRouter, Soap, Authorization, Utils, DEBUG) {

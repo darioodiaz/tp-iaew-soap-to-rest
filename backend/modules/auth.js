@@ -25,6 +25,7 @@ function getAuthorizationUri(scope = 'write') {
   const authorizationUri = oauthServer.authorizationCode.authorizeURL({ redirect_uri, scope });
   return authorizationUri;
 }
+
 function getAccessToken(code, res) {
   const tokenConfig = { code, redirect_uri };
   return oauthServer.authorizationCode.getToken(tokenConfig)
