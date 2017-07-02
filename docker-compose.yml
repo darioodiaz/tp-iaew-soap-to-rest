@@ -2,11 +2,12 @@ version: '2'
 services:
   db:
     container_name: tpiaew-db
-    entrypoint: /db/backup/db-entrypoint.sh
+    entrypoint: /usr/db-entrypoint.sh
     image: mongo
     volumes:
       - ./db:/data/db
       - ./db-backup:/data/backup
+      - ./db-backup/db-entrypoint.sh:/usr/db-entrypoint.sh
 
   backend:
     build: .
