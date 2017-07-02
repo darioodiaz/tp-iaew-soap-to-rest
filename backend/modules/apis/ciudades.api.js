@@ -8,17 +8,12 @@ function buildsApis(apiRouter, Soap, Authorization, Utils, DEBUG) {
         }
         
         requestParams.ConsultarCiudadesRequest.IdPais = req.params.id;
-        Soap(Utils.SOAP_SERVICES.CONSULTAR_CIUDADES.soapService, onSuccess.bind(res), onError.bind(res), requestParams);
+        Soap(Utils.SOAP_SERVICES.CONSULTAR_CIUDADES.soapService, onSuccess.bind(res), Utils.parseError(error, res), requestParams);
     });
 }
 
 function onSuccess(data) {
     this.send(200, data.ConsultarCiudadesResult.Ciudades.CiudadEntity);
-}
-function onError(error) {
-    console.log('Error:');
-    console.log(error.response.req._header);
-    this.send(500, error);
 }
 
 module.exports = buildsApis;

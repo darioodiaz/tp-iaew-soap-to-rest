@@ -31,20 +31,15 @@ function buildsApis(apiRouter, Soap, Authorization, Utils, DEBUG) {
         requestParams.ConsultarVehiculosRequest.FechaHoraRetiro = moment(req.query.fechaRetiro).format('YYYY-MM-DD');
         requestParams.ConsultarVehiculosRequest.FechaHoraDevolucion = moment(req.query.fechaDevolucion).format('YYYY-MM-DD');
 
-        Soap(Utils.SOAP_SERVICES.VEHICULOS_DISPONIBLES.soapService, onSuccess.bind(res), onError.bind(res), requestParams);
+        Soap(Utils.SOAP_SERVICES.VEHICULOS_DISPONIBLES.soapService, onSuccess.bind(res), Utils.parseError(error, res), requestParams);
     });
 }
 
 function onSuccess(data) {
     data.ConsultarVehiculosDisponiblesResult.VehiculosEncontrados.VehiculoModel.forEach( (item) => {
-        item.PrecioVentaPublico = item.PrecioPorDia + item.PrecioPorDia * 0.2;
+        item.PrecioVentaPublico = Number(item.PrecioPorDia) + Number(item.PrecioPorDia) * 0.2;
     });
     this.send(200, data.ConsultarVehiculosDisponiblesResult.VehiculosEncontrados.VehiculoModel);
-}
-function onError(error) {
-    console.log('Error:');
-    console.log(error.response.req._header);
-    this.send(500, error);
 }
 
 module.exports = buildsApis;

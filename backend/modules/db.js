@@ -8,6 +8,8 @@ module.exports = function(cb) {
 			CodigoReserva: String,
 			FecahReserva: Date,
 			Costo: Number,
+			Estado: String,
+			FechaCancelacion: Date,
 			PrecioVenta: Number,
 			IdVendedor: Number,
 			IdCliente: Number
