@@ -2,7 +2,6 @@
 
 set -e
 
-docker-compose stop
 echo "Starting Tp-IAEW server"
 echo "Starting db"
 docker-compose up -d db
