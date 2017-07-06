@@ -9,7 +9,7 @@ function buildsApis(apiRouter, Soap, Authorization, Utils, DEBUG) {
         let requestParams = { ConsultarReservasRequest: {} };
         requestParams.ConsultarReservasRequest.IncluirCanceladas = incluirBajas;
 
-        Soap(Utils.SOAP_SERVICES.CONSULTAR_RESERVAS.soapService, onGetReservasSuccess.bind(res), Utils.parseError(error, res), requestParams);
+        Soap(Utils.SOAP_SERVICES.CONSULTAR_RESERVAS.soapService, onGetReservasSuccess.bind(res), Utils.parseError.bind(res), requestParams);
     });
 
     apiRouter.post(Utils.buildEndpoint('reservas'), DEBUG ? Utils.debugMiddleware : Authorization.validateRequest(Utils.SOAP_SERVICES.RESERVAR_VEHICULO), (req, res, next) => {
@@ -64,7 +64,7 @@ function buildsApis(apiRouter, Soap, Authorization, Utils, DEBUG) {
         requestParams.ReservarVehiculoRequest.LugarRetiro = req.body.lugarRetiro;
         requestParams.ReservarVehiculoRequest.NroDocumentoCliente = req.body.documentoCliente;
 
-        Soap(Utils.SOAP_SERVICES.RESERVAR_VEHICULO.soapService, (data) => onReservarVehiculoSuccess(req, res, data), Utils.parseError(error, res), requestParams);
+        Soap(Utils.SOAP_SERVICES.RESERVAR_VEHICULO.soapService, (data) => onReservarVehiculoSuccess(req, res, data), Utils.parseError.bind(res), requestParams);
     });
 
     apiRouter.del(Utils.buildEndpoint('reservas/:codigoReserva'), DEBUG ? Utils.debugMiddleware : Authorization.validateRequest(Utils.SOAP_SERVICES.CONSULTAR_CIUDADES), (req, res, next) => {
@@ -75,7 +75,7 @@ function buildsApis(apiRouter, Soap, Authorization, Utils, DEBUG) {
         let requestParams = { CancelarReservaRequest: {} };
         requestParams.CancelarReservaRequest.CodigoReserva = req.params.codigoReserva;
 
-        Soap(Utils.SOAP_SERVICES.CANCELAR_RESERVA.soapService, (data) => onCancelarReservaSucess(req, res, data), Utils.parseError(error, res), requestParams);
+        Soap(Utils.SOAP_SERVICES.CANCELAR_RESERVA.soapService, (data) => onCancelarReservaSucess(req, res, data), Utils.parseError.bind(res), requestParams);
     });
 }
 

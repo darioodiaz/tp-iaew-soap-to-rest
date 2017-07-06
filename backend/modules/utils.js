@@ -38,7 +38,8 @@ const SOAP_SERVICES = {
     }
 };
 
-function parseError(soapError, res) {
+function parseError(soapError) {
+    let res = this;
     xml2js(soapError.body, (err, result) => {
         onError(result['s:Envelope']['s:Body'][0]['s:Fault'], res);
     });
@@ -51,7 +52,7 @@ function onError(soapErrors, res) {
             error: error.detail[0].StatusResponse[0].ErrorDescription[0]
         };
     });
-    let errorAsString = errors.map((error) => error.error).join('\n');
+    let errorAsString = (errors || []).map((error) => error.error).join('\n');
     console.log('Error:', errores);
     res.send(500, { error: errorAsString, errors });
 }

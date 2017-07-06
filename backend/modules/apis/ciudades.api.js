@@ -8,7 +8,7 @@ function buildsApis(apiRouter, Soap, Authorization, Utils, DEBUG) {
         }
         
         requestParams.ConsultarCiudadesRequest.IdPais = req.params.id;
-        Soap(Utils.SOAP_SERVICES.CONSULTAR_CIUDADES.soapService, onSuccess.bind(res), Utils.parseError(error, res), requestParams);
+        Soap(Utils.SOAP_SERVICES.CONSULTAR_CIUDADES.soapService, onSuccess.bind(res), Utils.parseError.bind(res), requestParams);
     });
 }
 

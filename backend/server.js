@@ -1,6 +1,7 @@
 const restify = require('restify');
 const fs = require('fs');
 const CookieParser = require('restify-cookies');
+const moment = require('moment');
 
 const Authorization = require('./modules/auth');
 const apiRouter = require('./modules/apis');
@@ -14,6 +15,11 @@ const server = restify.createServer({
 const DEBUG = process.env.DEBUG === 'true';
 
 console.log(DEBUG && 'WARNING: Debug mode');
+
+server.on('uncaughtException', (request, res, route, error) => {
+  console.log('Server Error', error);
+  res.send(500, error);
+});
 
 server.use(restify.plugins.CORS());
 server.use(restify.plugins.queryParser());
@@ -65,6 +71,6 @@ server.get('/app', (req, res) => {
 
 db(() => {
   server.listen(3000, () => {
-    console.log('%s listening at %s', server.name, server.url);
+    console.log('%s listening at %s', server.name, server.url, ' - Starts at ', moment().format('DD/MM/YYYY HH:mm:ss') );
   });
 });
