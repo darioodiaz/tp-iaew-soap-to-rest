@@ -31,7 +31,7 @@ function buildsApis(apiRouter, Soap, Authorization, Utils, DEBUG) {
         requestParams.ConsultarVehiculosRequest.FechaHoraRetiro = moment(req.query.fechaRetiro).format('YYYY-MM-DD');
         requestParams.ConsultarVehiculosRequest.FechaHoraDevolucion = moment(req.query.fechaDevolucion).format('YYYY-MM-DD');
 
-        Soap(Utils.SOAP_SERVICES.VEHICULOS_DISPONIBLES.soapService, onSuccess.bind(res), Utils.parseError(error, res), requestParams);
+        Soap(Utils.SOAP_SERVICES.VEHICULOS_DISPONIBLES.soapService, onSuccess.bind(res), Utils.parseError(error).bind(res), requestParams);
     });
 }
 

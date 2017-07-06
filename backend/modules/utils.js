@@ -38,7 +38,8 @@ const SOAP_SERVICES = {
     }
 };
 
-function parseError(soapError, res) {
+function parseError(soapError) {
+    let res = this;
     xml2js(soapError.body, (err, result) => {
         onError(result['s:Envelope']['s:Body'][0]['s:Fault'], res);
     });
