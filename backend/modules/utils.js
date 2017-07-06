@@ -52,7 +52,7 @@ function onError(soapErrors, res) {
             error: error.detail[0].StatusResponse[0].ErrorDescription[0]
         };
     });
-    let errorAsString = errors.map((error) => error.error).join('\n');
+    let errorAsString = (errors || []).map((error) => error.error).join('\n');
     console.log('Error:', errores);
     res.send(500, { error: errorAsString, errors });
 }
