@@ -1,6 +1,7 @@
 const restify = require('restify');
 const fs = require('fs');
 const CookieParser = require('restify-cookies');
+const moment = require('moment');
 
 const Authorization = require('./modules/auth');
 const apiRouter = require('./modules/apis');
@@ -65,6 +66,6 @@ server.get('/app', (req, res) => {
 
 db(() => {
   server.listen(3000, () => {
-    console.log('%s listening at %s', server.name, server.url);
+    console.log('%s listening at %s', server.name, server.url, ' - Starts at ', moment().format('DD/MM/YYYY') );
   });
 });
