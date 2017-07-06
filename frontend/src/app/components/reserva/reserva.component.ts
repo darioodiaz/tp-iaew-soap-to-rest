@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ReservaService } from './reserva.service';
 
 @Component({
   selector: 'app-reserva',
@@ -8,27 +10,38 @@ export class ReservaComponent implements OnInit {
 
   private token: string;
   public resultados: any[] = [];
+  paises:any=[];
+  ciudades:any=[];
+  public consulta:any = {};
 
-  constructor() { }
+  constructor(private _activatedRoute:ActivatedRoute, private servicio: ReservaService) {
+
+   }
 
   ngOnInit() {
+    this.obtenerPaises();
   }
 
-  public obtenerToken() {
-
+  public obtenerPaises(){
+     this.servicio
+       .obtenerPaises()
+       .subscribe( resp => {
+          this.paises = resp;
+        });
   }
+
+public obtenerCiudades(id:number){
+  this.servicio
+    .obtenerCiudades(id)
+    .subscribe( resp => {
+      this.ciudades = resp;
+    })
+}
 
   public consultar() {
-    console.log("buscar reservas por pais");
-    let automovil = {
-      id: 1,
-      pais: 'Argentina',
-      estado: 'Libre',
-      precio: 500
-    }
-
-    this.resultados.push(automovil);
-
+    this.servicio.consultarVehiculos(this.consulta).subscribe( resp =>{
+      this.resultados = resp;
+    })
   }
 
 
