@@ -14,30 +14,26 @@
       <div>
         <div class="form-group">
           <label for="cmb_pais">País</label>
-          <select class="form-control" id="cmb_pais" (change)="obtenerCiudades($event.target.value)"  [(ngModel)]="consulta.paisId">
-            <option value="">Seleccione</option>
+          <select class="form-control" id="cmb_pais" (change)="obtenerCiudades($event.target.value)" [(ngModel)]="consulta.paisId">
+            <option [value]="Seleccione" selected>Seleccione</option>
             <option *ngFor="let pais of paises" [value]="pais.Id" >{{pais.Nombre}}</option>
           </select>
         </div>
         <div class="form-group">
           <label for="cmb_ciudad">Ciudad</label>
-          <select class="form-control" id="cmb_ciudad" [(ngModel)]="consulta.ciudadId">
-            <option value="">Seleccione</option>
+          <select class="form-control" id="cmb_ciudad" [(ngModel)]="consulta.ciudadId" [disabled]="ciudades.length == 0">
+            <option [value]="Seleccione" selected>Seleccione</option>
             <option *ngFor="let ciudad of ciudades" [value]="ciudad.Id" >{{ciudad.Nombre}}</option>
           </select>
         </div>
         <div class="row">
           <div class="form-group col-6">
             <label>Fecha desde</label>
-            <input class="form-control" placeholder="yyyy-mm-dd"
-             [(ngModel)]="consulta.fecha_retiro"
-              ngbDatepicker #d_desde="ngbDatepicker" (click)="d_desde.toggle()">
+            <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="consulta.fecha_retiro" ngbDatepicker #d_desde="ngbDatepicker" (click)="d_desde.toggle()">
           </div>
           <div class="form-group col-6">
             <label>Fecha hasta</label>
-            <input class="form-control" placeholder="yyyy-mm-dd"
-            [(ngModel)]="consulta.fecha_devolucion" ngbDatepicker #d_hasta="ngbDatepicker"
-            (click)="d_hasta.toggle()">
+            <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="consulta.fecha_devolucion" ngbDatepicker #d_hasta="ngbDatepicker" (click)="d_hasta.toggle()">
           </div>
         </div>
         <div class="form-group">
@@ -50,27 +46,68 @@
   </div>
 
 
-  <div class="row" *ngIf="resultados.length == 0" style="margin-top:40px;">
+  <div class="row" *ngIf="!resultados.length" style="margin-top:40px;">
     <div class="col">
       <h5>Sin resultados para mostrar</h5>
     </div>
   </div>
 
-  <table class="table" *ngIf="resultados.length > 0" style="margin-top:40px;">
-    <thead>
-      <th>#</th>
-      <th>País</th>
-      <th>Estado</th>
-      <th>Precio</th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let auto of resultados; let i=index">
-        <td>{{i}}</td>
-        <td>{{auto.pais}}</td>
-        <td>{{auto.estado}}</td>
-        <td>{{auto.precio}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div *ngIf="resultados.length">
+    <div class="row row-section line-divider-bottom">
+      <div class="col-1">
+        <p><strong>#</strong></p>
+      </div>
+      <div class="col-2">
+        <p><strong>Marca</strong></p>
+      </div>
+      <div class="col-2">
+        <p><strong>Modelo</strong></p>
+      </div>
+      <div class="col-2">
+        <p><strong>Precio día</strong></p>
+      </div>
+      <div class="col-2">
+        <p><strong>Disponibles</strong></p>
+      </div>
+      <div class="col-2">
+        <p><strong>Acciones</strong></p>
+      </div>
+    </div>
+  </div>
 
+
+
+  <div class="item-lista row line-divider-bottom" *ngFor="let auto of resultados; let indice=index">
+    <div class="col-1 line-divider-right">
+      <div class="primer-item">
+        <p>{{indice + 1}}</p>
+      </div>
+    </div>
+    <div class="col-2 ">
+      <div class="item" style="padding-left:20px;">
+        <p>{{auto.Marca}}</p>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="item" style="padding-left:20px;">
+        <p>{{auto.Modelo}}</p>
+      </div>
+    </div>
+    <div class="col-2 ">
+      <div class="item" style="padding-left:20px;">
+        <p>{{auto.PrecioPorDia}}</p>
+      </div>
+    </div>
+    <div class="col-2 line-divider-right">
+      <div class="item" style="padding-left:20px;">
+        <p>{{auto.CantidadDisponible}}</p>
+      </div>
+    </div>
+    <div class="col-1">
+      <div class="item-acciones col-md-auto col-xl-3 line-divider-left text-center" align="left">
+        <button type="button" class="btn btn-link " ngbTooltip="Reservar" [routerLink]="">
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

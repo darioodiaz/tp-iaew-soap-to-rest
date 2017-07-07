@@ -1,0 +1,46 @@
+@import 'variables';
+@import '~bootstrap/scss/bootstrap.scss';
+@import '~font-awesome/scss/font-awesome.scss';
+
+
+.item-lista {
+  padding: 0;
+  p {
+    word-wrap: break-word;
+    margin-bottom: 0;
+  }
+  .primer-item {
+    padding-left: 15px;
+  }
+  .item {
+    padding: 10px 15px;
+  }
+  .item-acciones {
+    padding: 0 10px;
+    .col {
+      text-align: center;
+    }
+  }
+}
+
+.row-section {
+  padding: 15px 0;
+}
+
+.line-divider-right {
+  border-right: $line-divider-height;
+}
+.line-divider-left {
+  border-left: $line-divider-height;
+}
+
+.full-height {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0 10px 15px;
+}
+
+.full-height > .col {
+  padding: 0;
+}

@@ -1,0 +1,39 @@
+body {
+  margin-bottom: 60px;
+  background-color: #F5F5F5;
+}
+
+.item-lista {
+  padding: 0;
+  p {
+    word-wrap: break-word;
+    margin-bottom: 0;
+  }
+  .primer-item {
+    padding-left: 15px;
+  }
+  .item {
+    padding: 10px 15px;
+  }
+  .item-acciones {
+    padding: 0 10px;
+    .col {
+      text-align: center;
+    }
+  }
+}
+
+.row-section {
+  padding: 15px 0;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.card {
+  &.card-bg-color {
+    background-color: #EEEEEE;
+  }
+  margin-bottom: 15px;
+}
