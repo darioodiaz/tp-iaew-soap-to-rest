@@ -46,6 +46,7 @@ function parseError(soapError) {
 }
 
 function onError(soapErrors, res) {
+    console.log('Errores', soapErrors[0]);
     let errors = soapErrors.map((error) => {
         return {
             code: error.detail[0].StatusResponse[0].ErrorCode[0],

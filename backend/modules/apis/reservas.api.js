@@ -57,8 +57,8 @@ function buildsApis(apiRouter, Soap, Authorization, Utils, DEBUG) {
         }
 
         requestParams.ReservarVehiculoRequest.ApellidoNombreCliente = req.body.apellidoNombreCliente;
-        requestParams.ReservarVehiculoRequest.FechaHoraDevolucion = req.body.fechaDevolucion;
-        requestParams.ReservarVehiculoRequest.FechaHoraRetiro = req.body.fechaRetiro;
+        requestParams.ReservarVehiculoRequest.FechaHoraDevolucion = moment(req.body.fechaDevolucion).format('YYYY-MM-DD');
+        requestParams.ReservarVehiculoRequest.FechaHoraRetiro = moment(req.body.fechaRetiro).format('YYYY-MM-DD');
         requestParams.ReservarVehiculoRequest.IdVehiculoCiudad = req.body.idVehiculo;
         requestParams.ReservarVehiculoRequest.LugarDevolucion = req.body.lugarDevolucion;
         requestParams.ReservarVehiculoRequest.LugarRetiro = req.body.lugarRetiro;

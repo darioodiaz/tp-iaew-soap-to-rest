@@ -15,7 +15,8 @@ services:
     image: tpiaew/backend
     environment:
       - DB=tpiaew-db
-      - DEBUG=true
+      - DEBUG=false
+      - OAUTH=http://130.211.183.120:8080
     volumes:
       - ./backend:/backend/
     depends_on:
