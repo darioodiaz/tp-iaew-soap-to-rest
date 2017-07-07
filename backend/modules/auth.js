@@ -8,10 +8,10 @@ const credentials = {
     secret: 'pass12345'
   },
   auth: {
-    tokenHost: `${process.env.OAUTH}/openam/oauth2/`,
-    tokenPath: `${process.env.OAUTH}/openam/oauth2/access_token`,
-    authorizePath: `${process.env.OAUTH}/openam/oauth2/authorize`,
-    authorizeHost: `${process.env.OAUTH}`
+    tokenHost: `${process.env.OAUTH || 'http://130.211.183.120:8080'}/openam/oauth2/`,
+    tokenPath: `${process.env.OAUTH || 'http://130.211.183.120:8080'}/openam/oauth2/access_token`,
+    authorizePath: `${process.env.OAUTH || 'http://130.211.183.120:8080'}/openam/oauth2/authorize`,
+    authorizeHost: `${process.env.OAUTH || 'http://130.211.183.120:8080'}`
   },
   options: {
     useBasicAuthorizationHeader: false
@@ -47,7 +47,7 @@ function validateToken(token) {
   const config = { headers: { 'Authorization': token } };
   return new bluebird((resolve, reject) => {
     console.log('Validando token con el servidor de OAuth');
-    axios.get(`${process.env.OAUTH}/openam/oauth2/tokeninfo`, config).then((tokenInfo) => {
+    axios.get(`${process.env.OAUTH || 'http://130.211.183.120:8080'}/openam/oauth2/tokeninfo`, config).then((tokenInfo) => {
       let serverToken = oauthServer.accessToken.create(tokenInfo);
       if (serverToken.expired()) {
         reject('Token expirado');
