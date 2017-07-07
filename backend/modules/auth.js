@@ -8,16 +8,16 @@ const credentials = {
     secret: 'pass12345'
   },
   auth: {
-    tokenHost: 'http://104.197.29.243:8080/openam/oauth2/',
-    tokenPath: 'http://104.197.29.243:8080/openam/oauth2/access_token',
-    authorizePath: 'http://104.197.29.243:8080/openam/oauth2/authorize',
+    tokenHost: `${process.env.OAUTH}/oauth2/`,
+    tokenPath: `${process.env.OAUTH}/oauth2/access_token`,
+    authorizePath: `${process.env.OAUTH}/oauth2/authorize`,
     authorizeHost: 'http://104.197.29.243:8080'
   },
   options: {
     useBasicAuthorizationHeader: false
   }
 };
-const redirect_uri = 'http://localhost:3000/callback';
+const redirect_uri = `${process.env.REDIRECT_URI || 'http://localhost'}:3000/callback`;
 
 const oauthServer = OAuth2.create(credentials);
 
