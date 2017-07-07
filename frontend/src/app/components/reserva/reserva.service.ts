@@ -20,7 +20,6 @@ export class ReservaService {
         console.log(resp.json());
         return resp.json();
       });
-
   }
 
   obtenerFecha(fecha){
