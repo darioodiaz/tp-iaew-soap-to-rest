@@ -8,16 +8,19 @@ import { NgbdDatepickerPopup } from './core/datepicker/datepicker-popup';
 import { APP_ROUTING } from './app.routes';
 
 import { ReservaService } from './components/reserva/reserva.service';
+import { ConsultaReservaService} from './components/consulta-reserva/consulta-reserva.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { ReservaComponent } from './components/reserva/reserva.component';
+import { ConsultaReservaComponent } from './components/consulta-reserva/consulta-reserva.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     ReservaComponent,
+    ConsultaReservaComponent,
     NgbdDatepickerPopup
   ],
   imports: [
@@ -28,7 +31,7 @@ import { ReservaComponent } from './components/reserva/reserva.component';
     NgbModule,
     APP_ROUTING
   ],
-  providers: [ReservaService],
+  providers: [ReservaService, ConsultaReservaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

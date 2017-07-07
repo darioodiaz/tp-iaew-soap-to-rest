@@ -12,8 +12,6 @@
   <div class="card">
     <div class="card-block">
       <div>
-
-
           <div class="form-group">
             <label for="cmb_pais">País</label>
             <select class="form-control" id="cmb_pais" (change)="obtenerCiudades($event.target.value)"  [(ngModel)]="consulta.paisId">
@@ -28,7 +26,7 @@
               <option *ngFor="let ciudad of ciudades" [value]="ciudad.Id" >{{ciudad.Nombre}}</option>
             </select>
           </div>
-      
+
         <div class="row">
           <div class="form-group col-6">
             <label>Fecha retiro</label>
@@ -57,24 +55,7 @@
     </div>
   </div>
 
-<<<<<<< HEAD
-  <table class="table" *ngIf="resultados.length > 0" style="margin-top:40px;">
-    <thead>
-      <th>#</th>
-      <th>Marca</th>
-      <th>Modelo</th>
-      <th>Precio diario</th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let auto of resultados; let i=index">
-        <td>{{i}}</td>
-        <td>{{auto.Marca}}</td>
-        <td>{{auto.Modelo}}</td>
-        <td>{{auto.PrecioPorDia}}</td>
-      </tr>
-    </tbody>
-  </table>
-=======
+
   <div *ngIf="resultados.length" style="margin-top:40px;">
     <div class="row row-section line-divider-bottom">
       <div class="col-1">
@@ -97,7 +78,6 @@
       </div>
     </div>
   </div>
->>>>>>> 7e179c74961aa2b84d92ec35e07c547f141f54bd
 
   <div class="item-lista row line-divider-bottom" *ngFor="let auto of resultados; let indice=index">
     <div class="col-1 line-divider-right">
