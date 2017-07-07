@@ -52,6 +52,7 @@ export class ReservaService {
       .map(resp => {
         console.log(resp.json());
         return resp.json();
+
       })
       .catch(this.mostrarError.bind(this));
 
@@ -62,6 +63,7 @@ export class ReservaService {
     error = error.json().error;
     this.modalService.open(this.modalErrorContent);
     return Observable.throw(error.json().error || 'Server error');
+
   }
 
   public obtenerFecha(fecha) {
