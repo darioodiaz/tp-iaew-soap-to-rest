@@ -15,9 +15,8 @@ services:
     image: tpiaew/backend
     environment:
       - DB=tpiaew-db
-      - DEBUG=true
-      - OAUTH=http://130.211.183.120:8080/openam
-      - REDIRECT_URI=http://ec2-52-91-64-221.compute-1.amazonaws.com
+      - DEBUG=false
+      - OAUTH=http://130.211.183.120:8080
     volumes:
       - ./backend:/backend/
     depends_on:

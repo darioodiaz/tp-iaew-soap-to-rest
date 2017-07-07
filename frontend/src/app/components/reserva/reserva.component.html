@@ -28,17 +28,19 @@
         </div>
         <div class="row">
           <div class="form-group col-6">
-            <label>Fecha desde</label>
-            <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="consulta.fecha_retiro" ngbDatepicker #d_desde="ngbDatepicker" (click)="d_desde.toggle()">
+            <label>Fecha retiro</label>
+            <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="consulta.fecha_retiro" ngbDatepicker #d_desde="ngbDatepicker"
+              (click)="d_desde.toggle()">
           </div>
           <div class="form-group col-6">
-            <label>Fecha hasta</label>
-            <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="consulta.fecha_devolucion" ngbDatepicker #d_hasta="ngbDatepicker" (click)="d_hasta.toggle()">
+            <label>Fecha devolucion</label>
+            <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="consulta.fecha_devolucion" ngbDatepicker #d_hasta="ngbDatepicker"
+              (click)="d_hasta.toggle()">
           </div>
         </div>
         <div class="form-group">
           <div class="text-right" style="margin-top:30px;">
-            <button type="button" (click)="consultar()" class="btn pull-right btn-primary">Buscar</button>
+            <button type="button" (click)="consultar()" class="btn pull-right btn-primary">BUSCAR</button>
           </div>
         </div>
       </div>
@@ -74,8 +76,6 @@
       </div>
     </div>
   </div>
-
-
 
   <div class="item-lista row line-divider-bottom" *ngFor="let auto of resultados; let indice=index">
     <div class="col-1 line-divider-right">
@@ -124,28 +124,62 @@
   </div>
 
   <div class="modal-body">
+
     <div class="row">
-      <div class="col-6">
+      <div class="col-3">
         <label>Marca: {{auto.Marca}}</label>
       </div>
-      <div class="col-6">
+      <div class="col-3">
         <label>Modelo: {{auto.Modelo}}</label>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-6">
+      <div class="col-3">
         <label>Cantidad de puertas: {{auto.CantidadPuertas}}</label>
       </div>
-      <div class="col-6">
+      <div class="col-3">
         <label>Puntaje: {{auto.Puntaje}}</label>
       </div>
     </div>
+
     <div class="row">
-      <div class="col-6">
+      <div class="col-3">
         <label>Dirección asistida: {{auto.TieneDireccion ? "SI" : "NO"}}</label>
       </div>
-      <div class="col-6">
+      <div class="col-3">
         <label>Aire acondicionado:  {{auto.TieneAireAcon ? "SI" : "NO"}}</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-lg-6">
+        <label for="cmb_cliente">Cliente</label>
+        <select class="form-control" id="cmb_cliente" [(ngModel)]="reserva.clienteSeleccionado" [disabled]="clientes.length == 0">
+            <option [value]="Seleccione" selected>Seleccione</option>
+            <option *ngFor="let cliente of clientes; let indice=index" [value]="indice" >{{cliente.Apellido}}, {{cliente.Nombre}}</option>
+          </select>
+      </div>
+      <div class="form-group col-lg-6">
+        <label for="cmb_vendedor">Vendedor</label>
+        <select class="form-control" id="cmb_vendedor" [(ngModel)]="reserva.vendedorSeleccionado" [disabled]="vendedores.length == 0">
+            <option [value]="Seleccione" selected>Seleccione</option>
+            <option *ngFor="let vendedor of vendedores; let indice=index" [value]="indice" >{{vendedor.Apellido}}, {{vendedor.Nombre}}</option>
+          </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-lg-6">
+        <label for="cmb_lugarRetiro">Lugar Retiro</label>
+        <select class="form-control" id="cmb_lugarRetiro" [(ngModel)]="reserva.lugarRetiroSeleccionado" [disabled]="lugares.length == 0">
+            <option [value]="Seleccione" selected>Seleccione</option>
+            <option *ngFor="let lugar of lugares; let indice=index" [value]="indice" >{{lugar.Nombre}}</option>
+          </select>
+      </div>
+      <div class="form-group col-lg-6">
+        <label for="cmb_lugarDevolucion">Lugar devolucion</label>
+        <select class="form-control" id="cmb_lugarDevolucion" [(ngModel)]="reserva.lugarDevolucionSeleccionado" [disabled]="lugares.length == 0">
+            <option [value]="Seleccione" selected>Seleccione</option>
+            <option *ngFor="let lugar of lugares; let indice=index" [value]="indice" >{{lugar.Nombre}}</option>
+          </select>
       </div>
     </div>
 

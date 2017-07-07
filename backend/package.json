@@ -4,11 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "DB=localhost node server.js",
-    "start:debug": "DB=localhost node --inspect server.js",
+    "start": "OAUTH=http://130.211.183.120:8080 node --inspect server.js",
     "deploy": "rm -r frontend && cd ../frontend && yarn && yarn build && cp -R dist ../backend && cd ../backend && mv dist frontend",
-    "debug": "DB=localhost DEBUG=true node server.js",
-    "debug:debug": "DB=localhost DEBUG=true node --inspect server.js"
+    "debug": "OAUTH=http://130.211.183.120:8080 DEBUG=true node --inspect server.js"
   },
   "author": "",
   "license": "ISC",
@@ -18,6 +16,7 @@
     "mongoose": "^4.11.0",
     "restify": "^4.3.0",
     "restify-cookies": "^0.2.2",
+    "restify-cors-middleware": "^1.0.0",
     "restify-router": "^0.4.2",
     "simple-oauth2": "^1.2.0",
     "soap": "^0.19.2",

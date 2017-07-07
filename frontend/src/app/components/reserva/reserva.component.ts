@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReservaService } from './reserva.service';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -15,9 +14,13 @@ export class ReservaComponent implements OnInit {
   public resultados: any[] = [];
   paises: any = [];
   ciudades: any = [];
+  clientes: any = [];
+  vendedores: any = [];
+  lugares: any = [];
   public consulta: any = {};
 
   auto: any = {};
+  reserva: any = {};
 
   closeResult: any;
 
@@ -32,25 +35,47 @@ export class ReservaComponent implements OnInit {
 
   open(content, id) {
     this.auto = this.resultados[id];
-    this.modalService.open(content).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = "";
-    });
+    this.obtenerClientes();
+    this.obtenerVendedores();
+    this.obtenerLugares();
+    this.modalService.open(content);
+  }
+
+  private obtenerClientes() {
+    this.servicio
+      .obtenerClientes()
+      .subscribe(resp => this.clientes = resp);
+  }
+
+  private obtenerVendedores() {
+    this.servicio
+      .obtenerVendedores()
+      .subscribe(resp => this.vendedores = resp);
+  }
+
+  private obtenerLugares() {
+    this.servicio
+      .obtenerLugares()
+      .subscribe(resp => this.lugares = resp);
   }
 
 
-  public reservar(idAuto: number) {
+  public reservar() {
+    let cliente = this.clientes[this.reserva.clienteSeleccionado];
+    let vendedor = this.clientes[this.reserva.vendedorSeleccionado];
+    let lugarRetiro = this.lugares[this.reserva.lugarRetiroSeleccionado];
+    let lugarDevolucion = this.lugares[this.reserva.lugarDevolucionSeleccionado];
+
     let reserva = {
-      "idVehiculo": idAuto,
-      "apellidoNombreCliente": "Diaz, Dario",
-      "documentoCliente": 35577465,
-      "fechaDevolucion": "2017-06-04",
-      "fechaRetiro": "2017-06-20",
-      "lugarDevolucion": "Aeropuerto",
-      "lugarRetiro": "Hotel",
-      "idCliente": 1,
-      "idVendedor": 1
+      "idVehiculo": this.auto.VehiculoCiudadId,
+      "apellidoNombreCliente": this.clientes[this.reserva.clienteSeleccionado].Apellido + ', ' + this.clientes[this.reserva.clienteSeleccionado].Nombre,
+      "documentoCliente": cliente.Documento,
+      "fechaDevolucion": this.servicio.obtenerFecha(this.consulta.fecha_devolucion),
+      "fechaRetiro": this.servicio.obtenerFecha(this.consulta.fecha_retiro),
+      "lugarDevolucion": lugarDevolucion.Nombre,
+      "lugarRetiro": lugarRetiro.Nombre,
+      "idCliente": cliente.Id,
+      "idVendedor": vendedor.Id
     };
 
     this.servicio.post(reserva).subscribe(result => {
@@ -58,11 +83,6 @@ export class ReservaComponent implements OnInit {
     });
 
   }
-
-
-
-
-
 
   public obtenerPaises() {
     this.servicio

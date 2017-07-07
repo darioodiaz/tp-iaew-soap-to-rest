@@ -13,7 +13,7 @@ let models = {};
 
 function connect() {
 	let promise = new bluebird((resolve, reject) => {
-		mongoose.connect(`mongodb://${process.env.DB}/tpiaew`, checkConnectionStatus);
+		mongoose.connect(`mongodb://${process.env.DB || 'localhost'}/tpiaew`, checkConnectionStatus);
 
 		function checkConnectionStatus(error) {
 			console.log('DB', 'Conectando a la BD');
@@ -25,7 +25,7 @@ function connect() {
 					throw new Error('Se supero el maximo intento permitido');
 				} else {
 					console.log(`Intentando de nuevo en 5 segundos | Quedan ${5-connectionAttempt} intentos`);
-					setTimeout( () => mongoose.connect(`mongodb://${process.env.DB}/tpiaew`, checkConnectionStatus), 5000);
+					setTimeout( () => mongoose.connect(`mongodb://${process.env.DB || 'localhost'}/tpiaew`, checkConnectionStatus), 5000);
 				}
 			} else {
 				console.log('Conexion exitosa con la BD');

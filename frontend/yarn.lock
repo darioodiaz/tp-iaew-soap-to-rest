@@ -138,6 +138,10 @@
   dependencies:
     tsickle "^0.21.0"
 
+"@ng-bootstrap/ng-bootstrap@^1.0.0-alpha.27":
+  version "1.0.0-alpha.27"
+  resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-1.0.0-alpha.27.tgz#f207e2d01ade62696f4d904243f54fc9cb1a7541"
+
 "@ngtools/json-schema@1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@ngtools/json-schema/-/json-schema-1.1.0.tgz#c3a0c544d62392acc2813a42c8a0dc6f58f86922"
@@ -2978,6 +2982,10 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
+ng2-cookies@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/ng2-cookies/-/ng2-cookies-1.0.12.tgz#3f3e613e0137b0649b705c678074b4bd08149ccc"
+
 no-case@^2.2.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/no-case/-/no-case-2.3.1.tgz#7aeba1c73a52184265554b7dc03baf720df80081"
@@ -5080,16 +5088,9 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
 
-ws@1.1.2:
+ws@1.1.2, ws@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/ws/-/ws-1.1.2.tgz#8a244fa052401e08c9886cf44a85189e1fd4067f"
-  dependencies:
-    options ">=0.0.5"
-    ultron "1.0.x"
-
-ws@^1.0.1:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-1.1.4.tgz#57f40d036832e5f5055662a397c4de76ed66bf61"
   dependencies:
     options ">=0.0.5"
     ultron "1.0.x"
