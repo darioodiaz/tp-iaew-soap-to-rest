@@ -5,6 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "OAUTH=http://130.211.183.120:8080 node --inspect server.js",
+    "production": "DB=ec2-52-91-64-221.compute-1.amazonaws.com OAUTH=http://130.211.183.120:8080 node --inspect server.js",
+    "production-amazon": "DB=www.muralestalleres.com.ar OAUTH=http://130.211.183.120:8080 node --inspect server.js",
     "deploy": "rm -r frontend && cd ../frontend && yarn && yarn build && cp -R dist ../backend && cd ../backend && mv dist frontend",
     "debug": "OAUTH=http://130.211.183.120:8080 DEBUG=true node --inspect server.js"
   },
