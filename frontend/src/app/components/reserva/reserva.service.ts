@@ -6,24 +6,12 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+declare var $: any;
 
 @Injectable()
 export class ReservaService {
   headersConf = {};
   url: string = "http://localhost:3000";
-  error: any;
-  modalErrorContent = `
-    <ng-template #content let-c="close" let-d="dismiss">
-        <div class="modal-header" style="text-align: center">
-            <h3 class="modal-title">Error</h3>
-        </div>
-        <div class="modal-body">
-            <p></p>
-        </div>
-        <div class="modal-footer">
-            <p>Footer</p>
-        </div>
-    </ng-template> `;
 
   constructor(private http: Http, private modalService: NgbModal) {
     this.autenticar();
@@ -39,7 +27,12 @@ export class ReservaService {
   public post(data) {
     this.autenticar();
     let api = "/api/reservas"
-    return this.http.post(this.url + api, data, this.headersConf);
+    return this.http.post(this.url + api, data, this.headersConf)
+      .map(resp => {
+        this.mostrarExito('Reserva realizada con exito');
+        console.log(resp.json());
+        return resp.json();
+      })
   }
 
   consultarVehiculos(filtros: any) {
@@ -57,11 +50,17 @@ export class ReservaService {
 
   }
 
-  mostrarError(error: Response) {
-    console.log(error.json().error);
-    error = error.json().error;
-    this.modalService.open(this.modalErrorContent);
-    return Observable.throw(error.json().error || 'Server error');
+  mostrarExito(texto) {
+    $('#txt-exito').text(texto);
+    $('#modal-exito').modal('show');
+  }
+
+  mostrarError(_error: Response) {
+    console.log(_error.json().error);
+    let error = _error.json().error;
+    $('#txt-error').text(error);
+    $('#modal-error').modal('show');
+    return Observable.throw(error || 'Server error');
   }
 
   public obtenerFecha(fecha) {

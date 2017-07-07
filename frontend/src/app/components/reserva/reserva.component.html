@@ -30,12 +30,12 @@
         <div class="row">
           <div class="form-group col-6">
             <label>Fecha retiro</label>
-            <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="consulta.fecha_retiro" ngbDatepicker #d_desde="ngbDatepicker"
+            <input class="form-control" placeholder="Elija una fecha" [(ngModel)]="consulta.fecha_retiro" ngbDatepicker #d_desde="ngbDatepicker"
               (click)="d_desde.toggle()">
           </div>
           <div class="form-group col-6">
             <label>Fecha devolucion</label>
-            <input class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="consulta.fecha_devolucion" ngbDatepicker #d_hasta="ngbDatepicker"
+            <input class="form-control" placeholder="Elija una fecha" [(ngModel)]="consulta.fecha_devolucion" ngbDatepicker #d_hasta="ngbDatepicker"
               (click)="d_hasta.toggle()">
           </div>
         </div>
@@ -65,10 +65,10 @@
         <p><strong>Marca</strong></p>
       </div>
       <div class="col-2">
-        <p><strong>Modelo</strong></p>
+        <p><strong>Precio por dia</strong></p>
       </div>
       <div class="col-2">
-        <p><strong>Precio día</strong></p>
+        <p><strong>Precio venta</strong></p>
       </div>
       <div class="col-2">
         <p><strong>Disponibles</strong></p>
@@ -92,12 +92,12 @@
     </div>
     <div class="col-2">
       <div class="item">
-        <p>{{auto.Modelo}}</p>
+        <p>{{auto.PrecioPorDia}}</p>
       </div>
     </div>
     <div class="col-2 ">
       <div class="item" style="padding-left:20px;">
-        <p>{{auto.PrecioPorDia}}</p>
+        <p>{{auto.PrecioVentaPublico}}</p>
       </div>
     </div>
     <div class="col-2 line-divider-right">

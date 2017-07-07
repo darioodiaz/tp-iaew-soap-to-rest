@@ -1,7 +1,7 @@
 const db = require('../mongo-server');
 
 function buildsApis(apiRouter, Soap, Authorization, Utils, DEBUG) {
-    apiRouter.get(Utils.buildEndpoint('lugares'), DEBUG ? Utils.debugMiddleware : Authorization.validateRequest(Utils.SERVICES.CONSULTAR_lugares), (req, res, next) => {
+    apiRouter.get(Utils.buildEndpoint('lugares'), DEBUG ? Utils.debugMiddleware : Authorization.validateRequest(Utils.SERVICES.CONSULTAR_LUGARES), (req, res, next) => {
         db.getModel('lugares').then((model) => {
         model.find({}, (error, lugares) => {
             if (error) {

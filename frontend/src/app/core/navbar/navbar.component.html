@@ -1,32 +1,37 @@
 <style>
 @import url('https://fonts.googleapis.com/css?family=Shrikhand');
+.navbar-nav .nav-item {
+  color: white !important;
+  padding-left: 10px;
+  padding-right: 10px;
+}
 </style>
 
 
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+<nav class="navbar navbar-inverse bg-primary navbar-toggleable-md">
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand" href="#" style="font-family: 'Shrikhand', cursive; font-size: xx-large;">TP IAEW</a>
+  <a class="navbar-brand" href="#" style="font-family: 'Shrikhand', cursive; font-size: xx-large; padding-right: 15px">TP IAEW</a>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" href="#" [routerLink]="['reserva']">Reservar vehiculo <span class="sr-only">(current)</span></a>
+        <a class="nav-link btn btn-primary" href="#" [routerLink]="['reserva']">Reservar vehiculo <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" href="#" [routerLink]="['consulta-reserva']">Ver reservas</a>
+        <a class="nav-link btn btn-primary" href="#" [routerLink]="['consulta-reserva']">Ver reservas</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="login('read')" href="#">Login (read)</a>
+      <li *ngIf="!tieneToken" class="nav-item">
+        <a class="nav-link btn btn-primary" (click)="login('read')" href="#">Login (read)</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="login('write')" href="#">Login (write)</a>
+      <li *ngIf="!tieneToken" class="nav-item">
+        <a class="nav-link btn btn-primary" (click)="login('write')" href="#">Login (write)</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="login('read write')" href="#">Login (read write)</a>
+      <li *ngIf="!tieneToken" class="nav-item">
+        <a class="nav-link btn btn-primary" (click)="login('read write')" href="#">Login (read write)</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="logout()" href="#">Logout</a>
+      <li *ngIf="tieneToken" class="nav-item">
+        <a class="nav-link btn btn-primary" (click)="logout()" href="#">Logout</a>
       </li>
     </ul>
   </div>

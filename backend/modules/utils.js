@@ -8,6 +8,9 @@ const SERVICES = {
     },
     'CONSULTAR_CLIENTES': {
         permissions: ['read', 'read_write']
+    },
+    'CONSULTAR_LUGARES': {
+        permissions: ['read', 'read_write']
     }
 };
 
@@ -54,7 +57,7 @@ function onError(soapErrors, res) {
         };
     });
     let errorAsString = (errors || []).map((error) => error.error).join('\n');
-    console.log('Error:', errores);
+    console.log('Error:', errors);
     res.send(500, { error: errorAsString, errors });
 }
 

@@ -9,13 +9,70 @@
   </div>
   <div class="form-check">
     <label class="form-check-label">
-      <input type="checkbox" class="form-check-input">
+      <input type="checkbox" [(ngModel)]="incluirBajas" class="form-check-input">
       Incluir dados de baja
     </label>
   </div>
   <div class="form-group">
     <div class="text-right" style="margin-top:30px;">
       <button type="button" (click)="consultar()" class="btn pull-right btn-primary">BUSCAR</button>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!resultados.length" style="margin-top:40px;">
+    <div class="col">
+      <h5>Sin resultados para mostrar</h5>
+    </div>
+  </div>
+
+
+  <div *ngIf="resultados.length" style="margin-top:40px;">
+    <div class="row row-section line-divider-bottom">
+      <div class="col-2">
+        <p><strong>#</strong></p>
+      </div>
+      <div class="col-4">
+        <p><strong>Cliente</strong></p>
+      </div>
+      <div class="col-2">
+        <p><strong>Estado</strong></p>
+      </div>
+      <div class="col-2">
+        <p><strong>Precio venta</strong></p>
+      </div>
+      <div class="col-2 text-center">
+        <p><strong>Acciones</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item-lista row line-divider-bottom" *ngFor="let reserva of resultados; let indice=index">
+    <div class="col-2 line-divider-right">
+      <div class="primer-item">
+        <p>{{reserva.CodigoReserva}}</p>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="item">
+        <p>{{reserva.ApellidoNombreCliente}}</p>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="item">
+        <p>{{reserva.Estado}}</p>
+      </div>
+    </div>
+    <div class="col-2 ">
+      <div class="item" style="padding-left:20px;">
+        <p>{{reserva.PrecioVenta}}</p>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="item-acciones col-md-auto col-xl-3 line-divider-left" align="left">
+        <button type="button" class="btn btn-primary " ngbTooltip="Cancelar reserva" (click)="cancelarReserva(reserva.CodigoReserva)" [disabled]="reserva.Estado.toLowerCase() != 'activa'">
+          CANCELAR
+        </button>
+      </div>
     </div>
   </div>
 

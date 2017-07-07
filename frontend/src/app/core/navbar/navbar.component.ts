@@ -7,7 +7,11 @@ import { Cookie } from 'ng2-cookies';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  private tieneToken:any;
+
+  constructor() {
+    this.tieneToken = Cookie.get('app-token') || false;
+  }
 
   login(scope) {
     window.location.replace('/login?scope=' + scope);
@@ -15,7 +19,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     Cookie.delete('app-token');
-    window.location.replace('/login?scope=read');
+    window.location.replace('/app');
   }
 
   ngOnInit() {

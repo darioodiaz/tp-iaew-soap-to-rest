@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ConsultaReservaService } from './consulta-reserva.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -12,10 +11,23 @@ export class ConsultaReservaComponent implements OnInit {
 
   private token: string;
   public resultados: any[] = [];
+  private incluirBajas: boolean;
 
 
-  constructor(private _activatedRoute: ActivatedRoute, private servicio: ConsultaReservaService, private modalService: NgbModal) {
+  constructor(private _activatedRoute: ActivatedRoute, private servicio: ConsultaReservaService) {
 
+  }
+
+  cancelarReserva(codigo) {
+    console.log('Cancelar', codigo);
+    this.servicio
+      .cancelar(codigo).subscribe( () => this.consultar() );
+  }
+
+  consultar() {
+    this.servicio
+      .consultar(this.incluirBajas)
+      .subscribe(resp => this.resultados = resp);
   }
 
   ngOnInit() {

@@ -67,7 +67,7 @@ function buildsApis(apiRouter, Soap, Authorization, Utils, DEBUG) {
         Soap(Utils.SOAP_SERVICES.RESERVAR_VEHICULO.soapService, (data) => onReservarVehiculoSuccess(req, res, data), Utils.parseError.bind(res), requestParams);
     });
 
-    apiRouter.del(Utils.buildEndpoint('reservas/:codigoReserva'), DEBUG ? Utils.debugMiddleware : Authorization.validateRequest(Utils.SOAP_SERVICES.CONSULTAR_CIUDADES), (req, res, next) => {
+    apiRouter.del(Utils.buildEndpoint('reservas/:codigoReserva'), DEBUG ? Utils.debugMiddleware : Authorization.validateRequest(Utils.SOAP_SERVICES.CANCELAR_RESERVA), (req, res, next) => {
         if (!req.params.codigoReserva) {
             res.send(400, { error: 'Debes proporcionar el codigo de reserva para poder cancelar' });
             return;
@@ -134,7 +134,7 @@ function onCancelarReservaSucess(req, res, data) {
             { CodigoReserva: req.params.codigoReserva }, //condition
             { Estado: data.CancelarReservaResult.Reserva.Estado, FechaCancelacion: data.CancelarReservaResult.Reserva.FechaCancelacion } //update
         ).exec((error, localReserva) => {
-            if (errir) {
+            if (error) {
                 console.log('DB: Updating reserva fails', error);
                 res.send(500, { error });
             } else {

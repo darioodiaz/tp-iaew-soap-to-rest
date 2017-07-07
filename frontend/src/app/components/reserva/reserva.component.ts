@@ -80,6 +80,7 @@ export class ReservaComponent implements OnInit {
 
     this.servicio.post(reserva).subscribe(result => {
       console.log(result);
+      this.consultar();
     });
 
   }
