@@ -10,6 +10,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "contributors": [
+    "Dario Diaz <darioo.diaz1@gmail.com>"
+  ],
   "private": true,
   "dependencies": {
     "@angular/animations": "^4.0.0",

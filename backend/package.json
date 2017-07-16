@@ -8,6 +8,9 @@
     "deploy": "rm -r frontend && cd ../frontend && yarn && yarn build && cp -R dist ../backend && cd ../backend && mv dist frontend",
     "debug": "OAUTH=http://130.211.183.120:8080 DEBUG=true node --inspect server.js"
   },
+  "contributors": [
+    "Santiago Fonzalida <santiifonzalida@gmail.com>"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
