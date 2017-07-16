@@ -70,6 +70,7 @@ export class ReservaComponent implements OnInit {
       "idVehiculo": this.auto.VehiculoCiudadId,
       "apellidoNombreCliente": this.clientes[this.reserva.clienteSeleccionado].Apellido + ', ' + this.clientes[this.reserva.clienteSeleccionado].Nombre,
       "documentoCliente": cliente.Documento,
+      "precioVenta": this.auto.PrecioVentaPublico,
       "fechaDevolucion": this.servicio.obtenerFecha(this.consulta.fecha_devolucion),
       "fechaRetiro": this.servicio.obtenerFecha(this.consulta.fecha_retiro),
       "lugarDevolucion": lugarDevolucion.Nombre,

@@ -5,6 +5,7 @@ const bluebird = require('bluebird');
 function buildsApis(apiRouter, Soap, Authorization, Utils, DEBUG) {
     apiRouter.get(Utils.buildEndpoint('reservas'), DEBUG ? Utils.debugMiddleware : Authorization.validateRequest(Utils.SOAP_SERVICES.CONSULTAR_RESERVAS), (req, res, next) => {
         let incluirBajas = !!req.query.incluirBajas;
+        console.log('Incluir bajas', req.query.incluirBajas);
 
         let requestParams = { ConsultarReservasRequest: {} };
         requestParams.ConsultarReservasRequest.IncluirCanceladas = incluirBajas;
@@ -96,7 +97,7 @@ function addLocalDbInfo(reserva) {
                 } else if (localReserva) {
                     reserva.IdCliente = localReserva.IdCliente;
                     reserva.IdVendedor = localReserva.IdVendedor;
-                    reserva.PrecioVenta = localReserva.PrecioVenta;
+                    reserva.PrecioVentaPublico = localReserva.PrecioVenta;
                 }
                 resolve();
             });
@@ -111,7 +112,7 @@ function onReservarVehiculoSuccess(req, res, data) {
         FechaReserva: response.FechaReserva,
         Estado: response.Estado,
         Costo: response.VehiculoPorCiudadEntity.VehiculoEntity.PrecioPorDia,
-        PrecioVenta: req.body.PrecioVentaPublico,
+        PrecioVenta: req.body.precioVenta,
         IdVendedor: req.body.idVendedor,
         IdCliente: req.body.idCliente
     };
@@ -122,7 +123,7 @@ function onReservarVehiculoSuccess(req, res, data) {
                 res.send(500, { error });
             } else {
                 console.log('Reserva added!');
-                res.send(201, response);
+                res.send(201, reserva);
             }
         });
     });

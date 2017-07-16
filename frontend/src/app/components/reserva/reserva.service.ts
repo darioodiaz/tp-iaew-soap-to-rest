@@ -29,7 +29,7 @@ export class ReservaService {
     let api = "/api/reservas"
     return this.http.post(this.url + api, data, this.headersConf)
       .map(resp => {
-        this.mostrarExito('Reserva realizada con exito');
+        this.mostrarExito('Reserva realizada con exito. Codigo reserva' + resp.json().CodigoReserva);
         console.log(resp.json());
         return resp.json();
       })

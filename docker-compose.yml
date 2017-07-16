@@ -8,8 +8,6 @@ services:
       - ./db:/data/db
       - ./db-backup:/data/backup
       - ./db-backup/db-entrypoint.sh:/usr/db-entrypoint.sh
-    ports:
-      - 27017:27017
 
   backend:
     build: .
